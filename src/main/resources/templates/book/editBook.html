@@ -1,0 +1,30 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit reader</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/books/{id}(id=${book.getBookId()})}">
+    <input type="hidden" th:field="*{book.authors}" />
+    <label> Введите название:</label>
+    <input type="text" th:value="${book.bookTitle}" name="bookTitle">
+    <br>
+    <label>Введите год написания книги: </label>
+    <input type="text" th:value="${book.yearOfCreation}" name="yearOfCreation"/>
+    <br/>
+    <div th:each="author, iterStat : ${authors}">
+        <label>Введите фамилию автора:</label>
+        <input type="text" th:value="${author.surname}" th:name="'authors[' + ${iterStat.index} + '].surname'" />
+        <br>
+        <label>Введите имя автора:</label>
+        <input type="text" th:value="${author.name}" th:name="'authors[' + ${iterStat.index} + '].name'" />
+        <br>
+        <label>Введите отчество автора:</label>
+        <input type="text" th:value="${author.middleName}" th:name="'authors[' + ${iterStat.index} + '].middleName'" />
+        <br>
+    </div>
+    <input type="submit" value="Редактировать книгу"/>
+
+</form>
+</body>
+</html>
